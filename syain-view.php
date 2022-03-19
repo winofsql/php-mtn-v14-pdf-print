@@ -41,6 +41,31 @@ $(function(){
             .select();
     }
 
+    // ファンクション用
+    $(window).on("keydown", function(e){
+
+        var key_code = e.which ? e.which : e.keyCode;
+
+        // 第一画面の F3 で IFRAME を開く
+        // 114 は F3 : gno が 2 は第二画面
+        if ( key_code == 114 && <?= $gno ?> == 1 ) {
+            ref2();
+            return false;
+        }
+
+        // 第二画面の F3 で デフォルトの動作をキャンセル
+        if ( key_code == 114 && <?= $gno ?> == 2 ) {
+            ref1();
+            return false;
+        }
+
+        // ESC で IFRAME を閉じる
+        if ( key_code == 27 ) {
+            $("iframe").css({"display": "none"});
+        }
+
+    });
+
 });
 
 // ******************************
@@ -76,6 +101,10 @@ function check(){
     var scode = $("#scode").val();
     if ( scode.length != 4 ) {
         alert("社員コードを4桁入力してください");
+        return false;
+    }
+
+    if ( <?= $gno ?> == 2 && !confirm("更新してもよろしいですか?") ) {
         return false;
     }
 
@@ -115,6 +144,7 @@ function check(){
         </div>
         <input <?= $disabled_1 ?> type="submit" name="btn" id="btn" class="btn btn-primary ms-4" value="確認">
         <input class="ms-3 btn btn-primary" <?= $disabled_1 ?> type="button" id="btn3" value="参照" onclick="ref2()">
+        <a class="ms-4 btn btn-success" href="print/mysql-query.php" target="print">社員一覧</a>
     </div>
 
     <div class="body">
