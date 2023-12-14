@@ -123,7 +123,10 @@ function check(){
 </head>
 
 <body>
-<h3 class="alert alert-primary">社員マスタメンテ</h3>
+<h3 class="alert alert-primary">
+    社員マスタメンテ
+    <a href=".." style="float:right;text-decoration:none;">📂</a>
+</h3>
 <div id="content">
 
     <form method="post"
